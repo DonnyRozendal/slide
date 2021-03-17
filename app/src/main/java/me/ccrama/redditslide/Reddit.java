@@ -476,7 +476,7 @@ public class Reddit extends MultiDexApplication implements Application.ActivityL
         } else {
             dir = new File(getCacheDir() + File.separator + "video-cache");
         }
-        LeastRecentlyUsedCacheEvictor evictor = new LeastRecentlyUsedCacheEvictor(256 * 1024 * 1024);
+        LeastRecentlyUsedCacheEvictor evictor = new LeastRecentlyUsedCacheEvictor(256L * 1024 * 1024);
         DatabaseProvider databaseProvider = new ExoDatabaseProvider(getAppContext());
         videoCache = new SimpleCache(dir, evictor, databaseProvider); // 256MB
 

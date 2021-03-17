@@ -65,12 +65,10 @@ public class AlbumFull extends Fragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                ValueAnimator va = null;
+                ValueAnimator va;
 
                 if (dy > 0 && !hidden) {
                     hidden = true;
-
-                    if (va != null && va.isRunning()) va.cancel();
 
                     final View base = rootView.findViewById(R.id.base);
                     va = ValueAnimator.ofFloat(1.0f, 0.2f);
@@ -87,8 +85,6 @@ public class AlbumFull extends Fragment {
 
                 } else if (hidden && dy <= 0) {
                     final View base = rootView.findViewById(R.id.base);
-
-                    if (va != null && va.isRunning()) va.cancel();
 
                     hidden = false;
                     va = ValueAnimator.ofFloat(0.2f, 1.0f);

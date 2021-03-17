@@ -490,8 +490,12 @@ public class BaseActivity extends PeekViewActivity
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setRecentBarTaskDescription(@Nullable String title, int color) {
-        int icon = title.equalsIgnoreCase("androidcirclejerk") ? R.drawable.matiasduarte
-                : R.drawable.ic_launcher;
+        int icon;
+        if (title != null && title.equalsIgnoreCase("androidcirclejerk")) {
+            icon = R.drawable.matiasduarte;
+        } else {
+            icon = R.drawable.ic_launcher;
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             setTaskDescription(new ActivityManager.TaskDescription(title, icon, color));

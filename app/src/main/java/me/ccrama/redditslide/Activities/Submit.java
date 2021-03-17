@@ -182,7 +182,7 @@ public class Submit extends BaseActivity {
                                             (SpoilerRobotoTextView) findViewById(R.id.submittext),
                                             (CommentOverflow) findViewById(R.id.commentOverflow));
                                 }
-                                if (s.getSubredditType().equals("RESTRICTED")) {
+                                if (s.getSubredditType() == Subreddit.Type.RESTRICTED) {
                                     subredditText.setText("");
                                     new AlertDialogWrapper.Builder(Submit.this).setTitle(
                                             R.string.err_submit_restricted)

@@ -9,6 +9,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
@@ -55,7 +56,8 @@ public class DeleteFile extends Activity {
                                     getContentResolver().delete(uri, null,
                                             null);
                                 }
-                                new File(finalImage).delete();
+                                boolean result = new File(finalImage).delete();
+                                Log.i("DeleteFile", "File deleted: " + result);
                             }
                         });
             } catch (Exception e) {
