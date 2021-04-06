@@ -55,13 +55,14 @@ import static me.ccrama.redditslide.Notifications.ImageDownloadNotificationServi
 public class Album extends FullScreenActivity implements FolderChooserDialogCreate.FolderCallback {
     public static final String EXTRA_URL = "url";
     public static final String SUBREDDIT = "subreddit";
+    public static final String IMAGE_LOCATION = "image_location";
     private List<Image> images;
     private int adapterPosition;
 
     @Override
     public void onFolderSelection(FolderChooserDialogCreate dialog, File folder, boolean isSaveToLocation) {
         if (folder != null) {
-            Reddit.appRestart.edit().putString("imagelocation", folder.getAbsolutePath()).apply();
+            Reddit.appRestart.edit().putString(IMAGE_LOCATION, folder.getAbsolutePath()).apply();
             Toast.makeText(this,
                     getString(R.string.settings_set_image_location, folder.getAbsolutePath()),
                     Toast.LENGTH_LONG).show();
@@ -113,9 +114,9 @@ public class Album extends FullScreenActivity implements FolderChooserDialogCrea
 
     public void doImageSave(boolean isGif, String contentUrl) {
         if (!isGif) {
-            if (Reddit.appRestart.getString("imagelocation", "").isEmpty()) {
+            if (Reddit.appRestart.getString(IMAGE_LOCATION, "").isEmpty()) {
                 showFirstDialog();
-            } else if (!new File(Reddit.appRestart.getString("imagelocation", "")).exists()) {
+            } else if (!new File(Reddit.appRestart.getString(IMAGE_LOCATION, "")).exists()) {
                 showErrorDialog();
             } else {
                 Intent i = new Intent(this, ImageDownloadNotificationService.class);
@@ -230,11 +231,12 @@ public class Album extends FullScreenActivity implements FolderChooserDialogCrea
 
                                           @Override
                                           public void onPageSelected(int position) {
+                                              // No operation needed
                                           }
 
                                           @Override
                                           public void onPageScrollStateChanged(int state) {
-
+                                              // No operation needed
                                           }
                                       }
 

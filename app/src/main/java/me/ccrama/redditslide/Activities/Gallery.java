@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import net.dean.jraw.models.Submission;
 
@@ -189,8 +190,7 @@ public class Gallery extends FullScreenActivity implements SubmissionDisplay {
 
     @NonNull
     private RecyclerView.LayoutManager createLayoutManager(final int numColumns) {
-        return new CatchStaggeredGridLayoutManager(numColumns,
-                CatchStaggeredGridLayoutManager.VERTICAL);
+        return new CatchStaggeredGridLayoutManager(numColumns, StaggeredGridLayoutManager.VERTICAL);
     }
 
     private int getNumColumns(final int orientation) {

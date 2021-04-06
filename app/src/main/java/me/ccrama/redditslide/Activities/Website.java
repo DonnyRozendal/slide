@@ -429,6 +429,7 @@ public class Website extends BaseActivityAnim {
                         if (!LinkUtil.tryOpenWithVideoPlugin(url)) {
                             return super.shouldOverrideUrlLoading(view, url);
                         }
+                        return false;
                     case EXTERNAL:
                     default:
                         return super.shouldOverrideUrlLoading(view, url);
