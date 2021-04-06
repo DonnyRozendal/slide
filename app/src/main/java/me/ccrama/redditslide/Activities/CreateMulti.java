@@ -71,9 +71,6 @@ public class CreateMulti extends BaseActivityAnim {
     private String old;
     public static final String EXTRA_MULTI = "multi";
 
-    //Shows a dialog with all Subscribed subreddits and allows the user to select which ones to include in the Multireddit
-    private String[] all;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         overrideSwipeFromAnywhere();
@@ -132,8 +129,8 @@ public class CreateMulti extends BaseActivityAnim {
             if (!sorted.contains(s)) sorted.add(s);
         }
 
-        //Array of all subs
-        all = new String[sorted.size()];
+        //Shows a dialog with all Subscribed subreddits and allows the user to select which ones to include in the Multireddit
+        final String[] all = new String[sorted.size()];
         //Contains which subreddits are checked
         boolean[] checked = new boolean[all.length];
 
@@ -161,17 +158,17 @@ public class CreateMulti extends BaseActivityAnim {
         }
 
         //Convert List back to Array
-        all = list.toArray(new String[0]);
+        final String[] allArray = list.toArray(new String[0]);
 
         final ArrayList<String> toCheck = new ArrayList<>(subs);
         new AlertDialogWrapper.Builder(this)
-                .setMultiChoiceItems(all, checked, (dialog, which, isChecked) -> {
+                .setMultiChoiceItems(allArray, checked, (dialog, which, isChecked) -> {
                     if (!isChecked) {
-                        toCheck.remove(all[which]);
+                        toCheck.remove(allArray[which]);
                     } else {
-                        toCheck.add(all[which]);
+                        toCheck.add(allArray[which]);
                     }
-                    Log.v(LogUtil.getTag(), "Done with " + all[which]);
+                    Log.v(LogUtil.getTag(), "Done with " + allArray[which]);
                 })
                 .setTitle(R.string.multireddit_selector)
                 .setPositiveButton(getString(R.string.btn_add).toUpperCase(), (dialog, which) -> {
@@ -185,7 +182,8 @@ public class CreateMulti extends BaseActivityAnim {
                         .inputRangeRes(2, 21, R.color.md_red_500)
                         .alwaysCallInputCallback()
                         .input(getString(R.string.reorder_subreddit_name), null, false, (dialog1, raw) -> {
-                            input = raw.toString().replaceAll("\\s", ""); //remove whitespace from input
+                            Log.i(getLocalClassName(), "Removing whitespace from input");
+                            input = raw.toString().replaceAll("\\s", "");
                         })
                         .positiveText(R.string.btn_add)
                         .onPositive((dialog12, which1) -> new AsyncGetSubreddit().execute(input))
