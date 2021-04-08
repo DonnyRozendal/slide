@@ -48,7 +48,7 @@ import me.ccrama.redditslide.SettingValues;
 import me.ccrama.redditslide.util.FileUtil;
 import me.ccrama.redditslide.util.LayoutUtils;
 import me.ccrama.redditslide.util.LogUtil;
-
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 3/5/2015.
