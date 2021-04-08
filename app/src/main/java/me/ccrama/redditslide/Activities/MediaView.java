@@ -355,9 +355,7 @@ public class MediaView extends FullScreenActivity
                     mBuilder.setContentTitle(getString(R.string.mediaview_saving, baseUrl))
                             .setSmallIcon(R.drawable.ic_get_app);
                     try {
-
-                        final URL url =
-                                new URL(baseUrl); //wont exist on server yet, just load the full version
+                        final URL url = new URL(baseUrl);
                         URLConnection ucon = url.openConnection();
                         ucon.setReadTimeout(5000);
                         ucon.setConnectTimeout(10000);
@@ -365,22 +363,22 @@ public class MediaView extends FullScreenActivity
                         BufferedInputStream inStream = new BufferedInputStream(is, 1024 * 5);
                         int length = ucon.getContentLength();
                         f.createNewFile();
-                        FileOutputStream outStream = new FileOutputStream(f);
-                        byte[] buff = new byte[5 * 1024];
+                        try (FileOutputStream outStream = new FileOutputStream(f)) {
+                            byte[] buff = new byte[5 * 1024];
 
-                        int len;
-                        int last = 0;
-                        while ((len = inStream.read(buff)) != -1) {
-                            outStream.write(buff, 0, len);
-                            int percent = Math.round(100.0f * f.length() / length);
-                            if (percent > last) {
-                                last = percent;
-                                mBuilder.setProgress(length, (int) f.length(), false);
-                                mNotifyManager.notify(1, mBuilder.build());
+                            int len;
+                            int last = 0;
+                            while ((len = inStream.read(buff)) != -1) {
+                                outStream.write(buff, 0, len);
+                                int percent = Math.round(100.0f * f.length() / length);
+                                if (percent > last) {
+                                    last = percent;
+                                    mBuilder.setProgress(length, (int) f.length(), false);
+                                    mNotifyManager.notify(1, mBuilder.build());
+                                }
                             }
+                            outStream.flush();
                         }
-                        outStream.flush();
-                        outStream.close();
                         inStream.close();
                         MediaScannerConnection.scanFile(MediaView.this,
                                 new String[]{f.getAbsolutePath()}, null,
@@ -441,9 +439,7 @@ public class MediaView extends FullScreenActivity
                     mBuilder.setContentTitle(getString(R.string.mediaview_saving, baseUrl))
                             .setSmallIcon(R.drawable.ic_get_app);
                     try {
-
-                        final URL url =
-                                new URL(baseUrl); //wont exist on server yet, just load the full version
+                        final URL url = new URL(baseUrl);
                         URLConnection ucon = url.openConnection();
                         ucon.setReadTimeout(5000);
                         ucon.setConnectTimeout(10000);
@@ -451,22 +447,22 @@ public class MediaView extends FullScreenActivity
                         BufferedInputStream inStream = new BufferedInputStream(is, 1024 * 5);
                         int length = ucon.getContentLength();
                         f.createNewFile();
-                        FileOutputStream outStream = new FileOutputStream(f);
-                        byte[] buff = new byte[5 * 1024];
+                        try (FileOutputStream outStream = new FileOutputStream(f)) {
+                            byte[] buff = new byte[5 * 1024];
 
-                        int len;
-                        int last = 0;
-                        while ((len = inStream.read(buff)) != -1) {
-                            outStream.write(buff, 0, len);
-                            int percent = Math.round(100.0f * f.length() / length);
-                            if (percent > last) {
-                                last = percent;
-                                mBuilder.setProgress(length, (int) f.length(), false);
-                                mNotifyManager.notify(1, mBuilder.build());
+                            int len;
+                            int last = 0;
+                            while ((len = inStream.read(buff)) != -1) {
+                                outStream.write(buff, 0, len);
+                                int percent = Math.round(100.0f * f.length() / length);
+                                if (percent > last) {
+                                    last = percent;
+                                    mBuilder.setProgress(length, (int) f.length(), false);
+                                    mNotifyManager.notify(1, mBuilder.build());
+                                }
                             }
+                            outStream.flush();
                         }
-                        outStream.flush();
-                        outStream.close();
                         inStream.close();
                         MediaScannerConnection.scanFile(MediaView.this,
                                 new String[]{f.getAbsolutePath()}, null,

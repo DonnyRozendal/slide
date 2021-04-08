@@ -263,11 +263,12 @@ public class SettingsBackup extends BaseActivityAnim
                 StringWriter fw = new StringWriter();
                 try {
                     InputStream is = getContentResolver().openInputStream(fileUri);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                    int c = reader.read();
-                    while (c != -1) {
-                        fw.write(c);
-                        c = reader.read();
+                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+                        int c = reader.read();
+                        while (c != -1) {
+                            fw.write(c);
+                            c = reader.read();
+                        }
                     }
                     String read = fw.toString();
                     if (read.contains("Slide_backupEND>")) {
@@ -294,9 +295,9 @@ public class SettingsBackup extends BaseActivityAnim
                             Log.v(LogUtil.getTag(), "WRITING TO " + newF.getAbsolutePath());
                             try {
                                 FileWriter newfw = new FileWriter(newF);
-                                BufferedWriter bw = new BufferedWriter(newfw);
-                                bw.write(innerFile);
-                                bw.close();
+                                try (BufferedWriter bw = new BufferedWriter(newfw)) {
+                                    bw.write(innerFile);
+                                }
                                 progress.setProgress(progress.getCurrentProgress() + 1);
                             } catch (IOException e) {
                                 Timber.e(e);
@@ -768,9 +769,9 @@ public class SettingsBackup extends BaseActivityAnim
 
             try {
                 FileWriter fw = new FileWriter(newF);
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(contents);
-                bw.close();
+                try (BufferedWriter bw = new BufferedWriter(fw)) {
+                    bw.write(contents);
+                }
                 progress.setProgress(progress.getCurrentProgress() + 1);
             } catch (IOException e) {
                 Timber.e(e);

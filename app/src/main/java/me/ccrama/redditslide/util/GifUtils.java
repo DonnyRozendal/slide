@@ -211,7 +211,6 @@ public class GifUtils {
                             + ".mp4");
 
                     OutputStream out = null;
-                    InputStream in = null;
 
                     try {
                         DataSource.Factory downloader = new OkHttpDataSourceFactory(Reddit.client, a.getString(R.string.app_name));
@@ -252,27 +251,27 @@ public class GifUtils {
 
                             if (audioUri != null) {
                                 LogUtil.v("Downloading DASH audio from: " + audioUri);
-                                DataSourceInputStream audioInputStream = new DataSourceInputStream(
-                                        cacheDataSourceFactory.createDataSource(), new DataSpec(audioUri));
-                                if (save) {
-                                    FileUtils.copyInputStreamToFile(audioInputStream,
-                                            new File(a.getCacheDir().getAbsolutePath(), "audio.mp4"));
-                                } else {
-                                    IOUtils.copy(audioInputStream, NullOutputStream.NULL_OUTPUT_STREAM);
+                                try (DataSourceInputStream audioInputStream = new DataSourceInputStream(
+                                        cacheDataSourceFactory.createDataSource(), new DataSpec(audioUri))) {
+                                    if (save) {
+                                        FileUtils.copyInputStreamToFile(audioInputStream,
+                                                new File(a.getCacheDir().getAbsolutePath(), "audio.mp4"));
+                                    } else {
+                                        IOUtils.copy(audioInputStream, NullOutputStream.NULL_OUTPUT_STREAM);
+                                    }
                                 }
-                                audioInputStream.close();
                             }
                             if (videoUri != null) {
                                 LogUtil.v("Downloading DASH video from: " + videoUri);
-                                DataSourceInputStream videoInputStream = new DataSourceInputStream(
-                                        cacheDataSourceFactory.createDataSource(), new DataSpec(videoUri));
-                                if (save) {
-                                    FileUtils.copyInputStreamToFile(videoInputStream,
-                                            new File(a.getCacheDir().getAbsolutePath(), "video.mp4"));
-                                } else {
-                                    IOUtils.copy(videoInputStream, NullOutputStream.NULL_OUTPUT_STREAM);
+                                try (DataSourceInputStream videoInputStream = new DataSourceInputStream(
+                                        cacheDataSourceFactory.createDataSource(), new DataSpec(videoUri))) {
+                                    if (save) {
+                                        FileUtils.copyInputStreamToFile(videoInputStream,
+                                                new File(a.getCacheDir().getAbsolutePath(), "video.mp4"));
+                                    } else {
+                                        IOUtils.copy(videoInputStream, NullOutputStream.NULL_OUTPUT_STREAM);
+                                    }
                                 }
-                                videoInputStream.close();
                             }
 
                             if (!save) {
@@ -281,36 +280,36 @@ public class GifUtils {
                                 if (mux(new File(a.getCacheDir().getAbsolutePath(), "video.mp4").getAbsolutePath(),
                                         new File(a.getCacheDir().getAbsolutePath(), "audio.mp4").getAbsolutePath(),
                                         new File(a.getCacheDir().getAbsolutePath(), "muxed.mp4").getAbsolutePath())) {
-                                    in = new FileInputStream(new File(a.getCacheDir().getAbsolutePath(), "muxed.mp4"));
+                                    try (InputStream in = new FileInputStream(new File(a.getCacheDir().getAbsolutePath(), "muxed.mp4"))) {
+                                        out = save ? new FileOutputStream(outFile) : NullOutputStream.NULL_OUTPUT_STREAM;
+                                        IOUtils.copy(in, out);
+                                    }
                                 } else {
                                     throw new IOException("Muxing failed!");
                                 }
                             } else {
-                                in = new FileInputStream(new File(a.getCacheDir().getAbsolutePath(), "video.mp4"));
+                                try (InputStream in = new FileInputStream(new File(a.getCacheDir().getAbsolutePath(), "video.mp4"))) {
+                                    out = save ? new FileOutputStream(outFile) : NullOutputStream.NULL_OUTPUT_STREAM;
+                                    IOUtils.copy(in, out);
+                                }
                             }
                         } else {
-                            in = new DataSourceInputStream(cacheDataSourceFactory.createDataSource(), new DataSpec(uri));
+                            try (InputStream in = new DataSourceInputStream(cacheDataSourceFactory.createDataSource(), new DataSpec(uri))) {
+                                out = save ? new FileOutputStream(outFile) : NullOutputStream.NULL_OUTPUT_STREAM;
+                                IOUtils.copy(in, out);
+                            }
                         }
-
-                        out = save ? new FileOutputStream(outFile) : NullOutputStream.NULL_OUTPUT_STREAM;
-                        IOUtils.copy(in, out);
-                        out.close();
                     } catch (Exception e) {
                         Timber.e(e);
                         LogUtil.e("Error saving GIF called with: "
                                 + "from = ["
                                 + uri
-                                + "], in = ["
-                                + in
                                 + "]");
                         return false;
                     } finally {
                         try {
                             if (out != null) {
                                 out.close();
-                            }
-                            if (in != null) {
-                                in.close();
                             }
                         } catch (IOException e) {
                             LogUtil.e("Error closing GIF called with: "
@@ -319,7 +318,6 @@ public class GifUtils {
                                     + "], out = ["
                                     + out
                                     + "]");
-                            return false;
                         }
                     }
                     return true;

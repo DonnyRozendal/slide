@@ -63,11 +63,9 @@ public class OfflineSubreddit {
 
     public static void writeSubmissionToStorage(Submission s, JsonNode node, Context c) {
         File toStore = new File(getCacheDirectory(c) + File.separator + s.getFullName());
-        try {
-            FileWriter writer = new FileWriter(toStore);
+        try (FileWriter writer = new FileWriter(toStore)) {
             writer.append(node.toString());
             writer.flush();
-            writer.close();
         } catch (IOException e) {
             Timber.e(e);
         }
@@ -267,11 +265,9 @@ public class OfflineSubreddit {
     public static String getStringFromFile(String name, Context c) {
         File f = new File(getCacheDirectory(c) + File.separator + name);
         if (f.exists()) {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(f));
+            try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
                 char[] chars = new char[(int) f.length()];
                 reader.read(chars);
-                reader.close();
                 return new String(chars);
             } catch (IOException e) {
                 Timber.e(e);

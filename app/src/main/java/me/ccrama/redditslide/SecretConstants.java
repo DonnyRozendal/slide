@@ -16,9 +16,7 @@ public class SecretConstants {
 
     public static String getBase64EncodedPublicKey(Context context) {
         if (base64EncodedPublicKey == null) {
-            InputStream input;
-            try {
-                input = context.getAssets().open("secretconstants.properties");
+            try (InputStream input = context.getAssets().open("secretconstants.properties")) {
                 Properties properties = new Properties();
                 properties.load(input);
                 base64EncodedPublicKey = properties.getProperty("base64EncodedPublicKey");
@@ -32,9 +30,7 @@ public class SecretConstants {
     }
     public static String getApiKey(Context context) {
         if (apiKey == null) {
-            InputStream input;
-            try {
-                input = context.getAssets().open("secretconstants.properties");
+            try (InputStream input = context.getAssets().open("secretconstants.properties")) {
                 Properties properties = new Properties();
                 properties.load(input);
                 apiKey = properties.getProperty("apiKey");
@@ -48,9 +44,7 @@ public class SecretConstants {
     }
     public static String getImgurApiKey(Context context) {
         if (apiKey == null) {
-            InputStream input;
-            try {
-                input = context.getAssets().open("secretconstants.properties");
+            try (InputStream input = context.getAssets().open("secretconstants.properties")) {
                 Properties properties = new Properties();
                 properties.load(input);
                 apiKey = properties.getProperty("imgur");
