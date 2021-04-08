@@ -73,6 +73,7 @@ import me.ccrama.redditslide.Views.ExoVideoView;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import timber.log.Timber;
 
 /**
  * GIF handling utilities
@@ -295,7 +296,7 @@ public class GifUtils {
                         IOUtils.copy(in, out);
                         out.close();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                         LogUtil.e("Error saving GIF called with: "
                                 + "from = ["
                                 + uri
@@ -538,7 +539,7 @@ public class GifUtils {
                         }
 
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                 }
 
@@ -917,7 +918,7 @@ public class GifUtils {
                     callback.onTestComplete(false, newURL);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
                 //Failed, this callback will test a new URL
                 callback.onTestComplete(false, newURL);
             }
@@ -963,7 +964,7 @@ public class GifUtils {
                         }
                     });
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
             } else {
                 DataSource.Factory downloader = new OkHttpDataSourceFactory(Reddit.client,
@@ -1076,7 +1077,7 @@ public class GifUtils {
             new MovieCreator();
             rawVideo = MovieCreator.build(videoFile);
         } catch (RuntimeException | IOException e) {
-            e.printStackTrace();
+            Timber.e(e);
             return false;
         }
 
@@ -1085,7 +1086,7 @@ public class GifUtils {
             new MovieCreator();
             audio = MovieCreator.build(audioFile);
         } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
+            Timber.e(e);
             return false;
         }
 
@@ -1104,7 +1105,7 @@ public class GifUtils {
         try {
             fos = new FileOutputStream(outputFile);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Timber.e(e);
             return false;
         }
         BufferedWritableFileByteChannel byteBufferByteChannel =
@@ -1114,7 +1115,7 @@ public class GifUtils {
             byteBufferByteChannel.close();
             fos.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            Timber.e(e);
             return false;
         }
         return true;

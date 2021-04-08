@@ -21,6 +21,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okio.BufferedSink;
+import timber.log.Timber;
 
 public class UploadImgurAlbum extends AsyncTask<Uri, Integer, String> {
     public String finalUrl;
@@ -62,7 +63,7 @@ public class UploadImgurAlbum extends AsyncTask<Uri, Integer, String> {
                 albumurl = album.getJSONObject("data").getString("deletehash");
                 finalUrl = "http://imgur.com/a/" + album.getJSONObject("data").getString("id");
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
                 return null;
             }
         }
@@ -92,7 +93,7 @@ public class UploadImgurAlbum extends AsyncTask<Uri, Integer, String> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
         return null;
     }

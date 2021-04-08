@@ -182,6 +182,7 @@ import me.ccrama.redditslide.util.OnSingleClickListener;
 import me.ccrama.redditslide.util.SortingUtil;
 import me.ccrama.redditslide.util.SubmissionParser;
 import me.ccrama.redditslide.util.TimeUtils;
+import timber.log.Timber;
 
 import static me.ccrama.redditslide.UserSubscriptions.modOf;
 
@@ -399,7 +400,7 @@ public class MainActivity extends BaseActivity
                         new AccountManager(Authentication.reddit).storeVisits(returned);
                         SynccitRead.newVisited = new ArrayList<>();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                     return null;
                 }
@@ -1032,7 +1033,7 @@ public class MainActivity extends BaseActivity
                                         }
                                     }
                                 } catch (Exception e) {
-                                    e.printStackTrace();
+                                    Timber.e(e);
                                 }
 
                                 return null;
@@ -2486,7 +2487,7 @@ public class MainActivity extends BaseActivity
                                                                     });
                                                                 }
                                                             });
-                                                            e.printStackTrace();
+                                                            Timber.e(e);
                                                         }
                                                         return null;
                                                     }
@@ -3190,7 +3191,7 @@ public class MainActivity extends BaseActivity
                                                                                             }
                                                                                             return true;
                                                                                         } catch (Exception e) {
-                                                                                            e.printStackTrace();
+                                                                                            Timber.e(e);
                                                                                             return false;
                                                                                         }
                                                                                     }
@@ -3257,7 +3258,7 @@ public class MainActivity extends BaseActivity
                                                                     }
                                                                     return true;
                                                                 } catch (Exception e) {
-                                                                    e.printStackTrace();
+                                                                    Timber.e(e);
                                                                     return false;
                                                                 }
                                                             }
@@ -4738,9 +4739,9 @@ public class MainActivity extends BaseActivity
                 });
                 ws.connect();
             } catch (IOException e) {
-                e.printStackTrace();
+                Timber.e(e);
             } catch (WebSocketException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
             return null;
         }

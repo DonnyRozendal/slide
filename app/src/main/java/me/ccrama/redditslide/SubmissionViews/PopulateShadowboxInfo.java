@@ -62,6 +62,7 @@ import me.ccrama.redditslide.util.ClipboardUtil;
 import me.ccrama.redditslide.util.LayoutUtils;
 import me.ccrama.redditslide.util.LinkUtil;
 import me.ccrama.redditslide.util.TimeUtils;
+import timber.log.Timber;
 
 /**
  * Created by carlo_000 on 2/27/2016.
@@ -161,7 +162,7 @@ public class PopulateShadowboxInfo {
                                             ActionStates.setSaved(s, true);
                                         }
                                     } catch (ApiException e) {
-                                        e.printStackTrace();
+                                        Timber.e(e);
                                     }
 
 
@@ -386,7 +387,7 @@ public class PopulateShadowboxInfo {
                                             ActionStates.setSaved(s, true);
                                         }
                                     } catch (ApiException e) {
-                                        e.printStackTrace();
+                                        Timber.e(e);
                                     }
 
 
@@ -661,7 +662,7 @@ public class PopulateShadowboxInfo {
             try {
                 new AccountManager(Authentication.reddit).report(submission, reason[0]);
             } catch (ApiException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
             return null;
         }

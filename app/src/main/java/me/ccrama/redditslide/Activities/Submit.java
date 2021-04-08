@@ -55,6 +55,7 @@ import me.ccrama.redditslide.Views.DoEditorActions;
 import me.ccrama.redditslide.Views.ImageInsertEditText;
 import me.ccrama.redditslide.util.SubmissionParser;
 import me.ccrama.redditslide.util.TitleExtractor;
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 3/5/2015.
@@ -237,7 +238,7 @@ public class Submit extends BaseActivity {
                         try {
                             return TitleExtractor.getPageTitle(params[0]);
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Timber.e(e);
                         }
                         return null;
                     }
@@ -382,14 +383,14 @@ public class Submit extends BaseActivity {
             try {
                 new UploadImgurSubmit(this, uris.get(0));
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         } else {
             //Multiple images
             try {
                 new UploadImgurAlbumSubmit(this, uris.toArray(new Uri[0]));
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
 
             }
         }
@@ -421,7 +422,7 @@ public class Submit extends BaseActivity {
                         Submit.this.finish();
                     } catch (final ApiException e) {
                         Drafts.addDraft(text);
-                        e.printStackTrace();
+                        Timber.e(e);
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -453,7 +454,7 @@ public class Submit extends BaseActivity {
 
                         Submit.this.finish();
                     } catch (final ApiException e) {
-                        e.printStackTrace();
+                        Timber.e(e);
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -511,7 +512,7 @@ public class Submit extends BaseActivity {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -577,7 +578,7 @@ public class Submit extends BaseActivity {
                             }
                         })
                         .show();
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
     }
@@ -634,7 +635,7 @@ public class Submit extends BaseActivity {
                             }
                         })
                         .show();
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
     }

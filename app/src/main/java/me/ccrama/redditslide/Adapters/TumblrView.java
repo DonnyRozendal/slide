@@ -36,6 +36,7 @@ import me.ccrama.redditslide.Tumblr.Photo;
 import me.ccrama.redditslide.Visuals.FontPreferences;
 import me.ccrama.redditslide.util.LinkUtil;
 import me.ccrama.redditslide.util.SubmissionParser;
+import timber.log.Timber;
 
 public class TumblrView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<Photo> users;
@@ -188,7 +189,7 @@ public class TumblrView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     holder.body.setOnClickListener(onGifImageClickListener);
                 }
             } catch (URISyntaxException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
 
             holder.itemView.setOnClickListener(onGifImageClickListener);

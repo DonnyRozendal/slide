@@ -39,6 +39,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import me.ccrama.redditslide.BuildConfig;
+import timber.log.Timber;
 
 
 /**
@@ -274,7 +275,7 @@ public class IabHelper {
                         listener.onIabSetupFinished(new IabResult(IABHELPER_REMOTE_EXCEPTION,
                                 "RemoteException while setting up in-app billing."));
                     }
-                    e.printStackTrace();
+                    Timber.e(e);
                     return;
                 }
 
@@ -402,14 +403,14 @@ public class IabHelper {
                     new Intent(), 0, 0, 0);
         } catch (SendIntentException e) {
             logError("SendIntentException while launching purchase flow for sku " + sku);
-            e.printStackTrace();
+            Timber.e(e);
             flagEndAsync();
 
             result = new IabResult(IABHELPER_SEND_INTENT_FAILED, "Failed to send intent.");
             if (listener != null) listener.onIabPurchaseFinished(result, null);
         } catch (RemoteException e) {
             logError("RemoteException while launching purchase flow for sku " + sku);
-            e.printStackTrace();
+            Timber.e(e);
             flagEndAsync();
 
             result = new IabResult(IABHELPER_REMOTE_EXCEPTION,
@@ -487,7 +488,7 @@ public class IabHelper {
                 logDebug("Purchase signature successfully verified.");
             } catch (JSONException e) {
                 logError("Failed to parse purchase data.");
-                e.printStackTrace();
+                Timber.e(e);
                 result = new IabResult(IABHELPER_BAD_RESPONSE, "Failed to parse purchase data.");
                 if (mPurchaseListener != null) {
                     mPurchaseListener.onIabPurchaseFinished(result, null);

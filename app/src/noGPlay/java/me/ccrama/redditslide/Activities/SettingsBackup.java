@@ -32,6 +32,7 @@ import me.ccrama.redditslide.SettingValues;
 import me.ccrama.redditslide.util.FileUtil;
 import me.ccrama.redditslide.util.LayoutUtils;
 import me.ccrama.redditslide.util.LogUtil;
+import timber.log.Timber;
 
 
 /**
@@ -107,7 +108,7 @@ public class SettingsBackup extends BaseActivityAnim {
                                 bw.close();
                                 progress.setProgress(progress.getCurrentProgress() + 1);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                Timber.e(e);
                             }
 
                         }
@@ -148,7 +149,7 @@ public class SettingsBackup extends BaseActivityAnim {
                     }
                 } catch (Exception e) {
                     progress.hide();
-                    e.printStackTrace();
+                    Timber.e(e);
                     new AlertDialogWrapper.Builder(SettingsBackup.this).setTitle(
                             R.string.err_file_not_found)
                             .setMessage(R.string.err_file_not_found_msg)
@@ -304,7 +305,7 @@ public class SettingsBackup extends BaseActivityAnim {
                                     }
                                     fw.write("END>");
                                 } catch (IOException e) {
-                                    e.printStackTrace();
+                                    Timber.e(e);
                                 } finally {
                                     close(fr);
                                 }
@@ -313,7 +314,7 @@ public class SettingsBackup extends BaseActivityAnim {
                         }
                         return null;
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                         //todo error
                     } finally {
                         close(fw);

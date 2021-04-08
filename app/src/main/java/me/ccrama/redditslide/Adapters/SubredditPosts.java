@@ -40,6 +40,7 @@ import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.NetworkUtil;
 import me.ccrama.redditslide.util.PhotoLoader;
 import me.ccrama.redditslide.util.TimeUtils;
+import timber.log.Timber;
 
 /**
  * This class is reponsible for loading subreddit specific submissions {@link loadMore(Context,
@@ -322,7 +323,7 @@ public class SubredditPosts implements PostLoader {
                     filteredSubmissions.addAll(getNextFiltered());
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
                 error = e;
                 if (e.getMessage() != null && e.getMessage().contains("Forbidden")) {
                     Reddit.authentication.updateToken(context);

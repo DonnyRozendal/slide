@@ -15,6 +15,7 @@ import net.dean.jraw.managers.InboxManager;
 import me.ccrama.redditslide.Authentication;
 import me.ccrama.redditslide.Notifications.CheckForMail;
 import me.ccrama.redditslide.util.NetworkUtil;
+import timber.log.Timber;
 
 /**
  * Created by brent on 1/27/16.
@@ -52,7 +53,7 @@ public class MarkAsReadService extends IntentService {
                 try {
                     inboxManager.setRead(message, true);
                 } catch (NetworkException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return;
                 }
             }

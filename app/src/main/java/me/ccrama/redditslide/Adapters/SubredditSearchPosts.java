@@ -22,6 +22,7 @@ import me.ccrama.redditslide.Authentication;
 import me.ccrama.redditslide.PostMatch;
 import me.ccrama.redditslide.R;
 import me.ccrama.redditslide.util.SortingUtil;
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 9/17/2015.
@@ -188,7 +189,7 @@ public class SubredditSearchPosts extends GeneralPosts {
                 return newSubmissions;
             } catch (Exception e) {
               error = e;
-                e.printStackTrace();
+                Timber.e(e);
                 return null;
             }
         }

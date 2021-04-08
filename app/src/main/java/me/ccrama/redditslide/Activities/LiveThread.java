@@ -62,6 +62,7 @@ import me.ccrama.redditslide.util.SubmissionParser;
 import me.ccrama.redditslide.util.TimeUtils;
 import me.ccrama.redditslide.util.TwitterObject;
 import okhttp3.OkHttpClient;
+import timber.log.Timber;
 
 public class LiveThread extends BaseActivityAnim {
 
@@ -216,7 +217,7 @@ public class LiveThread extends BaseActivityAnim {
                                             }
                                         });
                                     } catch (IOException e) {
-                                        e.printStackTrace();
+                                        Timber.e(e);
                                     }
                                 } else if (s.contains("embeds_ready")) {
                                     String node = updates.get(0).getDataNode().toString();
@@ -232,7 +233,7 @@ public class LiveThread extends BaseActivityAnim {
                                             }
                                         });
                                     } catch (Exception e) {
-                                        e.printStackTrace();
+                                        Timber.e(e);
                                     }
 
                                 } /* todoelse if(s.contains("delete")){
@@ -243,7 +244,7 @@ public class LiveThread extends BaseActivityAnim {
                         });
                         ws.connect();
                     } catch (IOException | WebSocketException e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                     return null;
                 }
@@ -344,7 +345,7 @@ public class LiveThread extends BaseActivityAnim {
                     LogUtil.v("Got " + HtmlCompat.fromHtml(result.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY));
                     twitter = new ObjectMapper().readValue(result.toString(), TwitterObject.class);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
             }
 

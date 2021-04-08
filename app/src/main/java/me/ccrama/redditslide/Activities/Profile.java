@@ -66,6 +66,7 @@ import me.ccrama.redditslide.util.LinkUtil;
 import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.SortingUtil;
 import me.ccrama.redditslide.util.TimeUtils;
+import timber.log.Timber;
 import uz.shift.colorpicker.LineColorPicker;
 import uz.shift.colorpicker.OnColorChangedListener;
 
@@ -488,7 +489,7 @@ public class Profile extends BaseActivityAnim {
                             categories.add(0, "No category");
                             return categories;
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Timber.e(e);
                             //probably has no categories?
                             return new ArrayList<String>() {{
                                 add(0, "No category");

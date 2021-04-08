@@ -32,6 +32,7 @@ import java.util.Set;
 import me.ccrama.redditslide.util.GifUtils;
 import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.PhotoLoader;
+import timber.log.Timber;
 
 /**
  * Created by carlo_000 on 4/18/2016.
@@ -146,7 +147,7 @@ public class CommentCacheAsync extends AsyncTask {
                     try {
                         submissions.addAll(p.next());
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                 }
 

@@ -154,7 +154,7 @@ public class SettingsBackup extends BaseActivityAnim
 
                                                                         reader.close();
                                                                     } catch (IOException e) {
-                                                                        e.printStackTrace();
+                                                                        Timber.e(e);
                                                                     } finally {
                                                                         if (reader != null) {
                                                                             reader.close();
@@ -299,7 +299,7 @@ public class SettingsBackup extends BaseActivityAnim
                                 bw.close();
                                 progress.setProgress(progress.getCurrentProgress() + 1);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                Timber.e(e);
                             }
 
                         }
@@ -343,7 +343,7 @@ public class SettingsBackup extends BaseActivityAnim
                     }
                 } catch (Exception e) {
                     progress.hide();
-                    e.printStackTrace();
+                    Timber.e(e);
                     new AlertDialogWrapper.Builder(SettingsBackup.this).setTitle(
                             getString(R.string.err_file_not_found))
                             .setMessage(getString(
@@ -633,7 +633,7 @@ public class SettingsBackup extends BaseActivityAnim
                                     }
                                     fw.write("END>");
                                 } catch (IOException e) {
-                                    e.printStackTrace();
+                                    Timber.e(e);
                                 } finally {
                                     close(fr);
                                 }
@@ -642,7 +642,7 @@ public class SettingsBackup extends BaseActivityAnim
                         }
                         return null;
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                         //todo error
                     } finally {
                         close(fw);
@@ -773,7 +773,7 @@ public class SettingsBackup extends BaseActivityAnim
                 bw.close();
                 progress.setProgress(progress.getCurrentProgress() + 1);
             } catch (IOException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
             driveContents.discard(mGoogleApiClient);
             return contents;

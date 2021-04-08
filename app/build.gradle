@@ -131,6 +131,7 @@ dependencies {
     implementation 'com.mikepenz:aboutlibraries:6.2.3'
     implementation 'org.mp4parser:isoparser:1.9.41'
     implementation 'org.mp4parser:muxer:1.9.41'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
 /** Testing **/
     testImplementation 'junit:junit:4.13.1'

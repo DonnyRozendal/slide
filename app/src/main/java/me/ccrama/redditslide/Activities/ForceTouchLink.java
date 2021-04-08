@@ -71,7 +71,7 @@ public class ForceTouchLink extends BaseActivityAnim {
                         /*try {
                            urlGotten =  ImageExtractor.extractImageUrl(url);
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            Timber.e(e);
                         }*/
                         return null;
                     }

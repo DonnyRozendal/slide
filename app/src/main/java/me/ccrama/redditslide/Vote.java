@@ -13,6 +13,7 @@ import net.dean.jraw.models.PublicContribution;
 import net.dean.jraw.models.VoteDirection;
 
 import me.ccrama.redditslide.util.LayoutUtils;
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 9/19/2015.
@@ -44,7 +45,7 @@ public class Vote extends AsyncTask<PublicContribution, Void, Void> {
                 new AccountManager(Authentication.reddit).vote(sub[0], direction);
             } catch (ApiException | RuntimeException e) {
                 createVoteSnackbar(R.string.vote_err);
-                e.printStackTrace();
+                Timber.e(e);
             }
         } else {
             createVoteSnackbar(R.string.vote_err_login);

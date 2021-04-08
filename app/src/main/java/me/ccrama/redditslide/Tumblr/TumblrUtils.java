@@ -22,6 +22,7 @@ import me.ccrama.redditslide.Reddit;
 import me.ccrama.redditslide.util.HttpUtil;
 import me.ccrama.redditslide.util.LogUtil;
 import okhttp3.OkHttpClient;
+import timber.log.Timber;
 
 /**
  * Created by carlo_000 on 2/1/2016.
@@ -73,7 +74,7 @@ public class TumblrUtils {
                     }
                 });
             } catch (IOException e) {
-                e.printStackTrace();
+                Timber.e(e);
                 LogUtil.e(e, "parseJson error, baseData [" + baseData + "]");
             }
         }

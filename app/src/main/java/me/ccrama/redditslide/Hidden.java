@@ -9,6 +9,8 @@ import net.dean.jraw.models.Submission;
 import java.util.HashSet;
 import java.util.Set;
 
+import timber.log.Timber;
+
 /**
  * Created by carlo_000 on 10/16/2015.
  */
@@ -23,7 +25,7 @@ public class Hidden {
                     id.add(s.getFullName());
                     new AccountManager(Authentication.reddit).hide(true, (Submission) s);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
                 return null;
             }
@@ -38,7 +40,7 @@ public class Hidden {
                     id.remove(s.getFullName());
                     new AccountManager(Authentication.reddit).hide(false, (Submission) s);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
                 return null;
             }

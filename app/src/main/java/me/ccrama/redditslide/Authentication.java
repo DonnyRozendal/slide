@@ -27,6 +27,7 @@ import java.util.UUID;
 import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.NetworkUtil;
 import okhttp3.Protocol;
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 3/30/2015.
@@ -164,7 +165,7 @@ public class Authentication {
                             }
                             Log.v(LogUtil.getTag(), "AUTHENTICATED");
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Timber.e(e);
                         }
 
                     } else {
@@ -310,7 +311,7 @@ public class Authentication {
                     }
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     if (e instanceof NetworkException) {
                         Toast.makeText(mContext, "Error " + ((NetworkException) e).getResponse()
                                         .getStatusMessage() + ": " + (e).getMessage(),
@@ -343,7 +344,7 @@ public class Authentication {
                     didOnline = true;
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     if (e instanceof NetworkException) {
                         Toast.makeText(mContext, "Error " + ((NetworkException) e).getResponse()
                                         .getStatusMessage() + ": " + (e).getMessage(),

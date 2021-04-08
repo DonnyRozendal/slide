@@ -57,6 +57,7 @@ import me.ccrama.redditslide.util.GifUtils;
 import me.ccrama.redditslide.util.HttpUtil;
 import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.NetworkUtil;
+import timber.log.Timber;
 
 
 /**
@@ -485,7 +486,7 @@ public class PeekMediaView extends RelativeLayout {
                         });
 
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                     return null;
                 }

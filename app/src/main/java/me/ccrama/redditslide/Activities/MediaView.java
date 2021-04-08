@@ -81,6 +81,7 @@ import me.ccrama.redditslide.util.LinkUtil;
 import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.NetworkUtil;
 import me.ccrama.redditslide.util.ShareUtil;
+import timber.log.Timber;
 
 import static me.ccrama.redditslide.Activities.AlbumPager.readableFileSize;
 import static me.ccrama.redditslide.Notifications.ImageDownloadNotificationService.EXTRA_SUBMISSION_TITLE;
@@ -251,7 +252,7 @@ public class MediaView extends FullScreenActivity
                     //todo possibly share gifs  b.sheet(9, ic_share, "Share GIF");
                 }
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
             b.sheet(6, file, getString(R.string.mediaview_save, type));
 
@@ -412,7 +413,7 @@ public class MediaView extends FullScreenActivity
                                     }
                                 });
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                 }
                 return null;
@@ -488,7 +489,7 @@ public class MediaView extends FullScreenActivity
                                     }
                                 });
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                 }
                 return null;
@@ -1019,7 +1020,7 @@ public class MediaView extends FullScreenActivity
                         });
 
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                     return null;
                 }

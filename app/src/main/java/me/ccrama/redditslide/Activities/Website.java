@@ -40,6 +40,7 @@ import me.ccrama.redditslide.Visuals.Palette;
 import me.ccrama.redditslide.util.AdBlocker;
 import me.ccrama.redditslide.util.LinkUtil;
 import me.ccrama.redditslide.util.LogUtil;
+import timber.log.Timber;
 
 public class Website extends BaseActivityAnim {
 
@@ -60,7 +61,7 @@ public class Website extends BaseActivityAnim {
                 return "";
             return domain.startsWith("www.") ? domain.substring(4) : domain;
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
         return url;
     }

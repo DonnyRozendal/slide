@@ -9,6 +9,7 @@ import okio.BufferedSink;
 import okio.ForwardingSink;
 import okio.Okio;
 import okio.Sink;
+import timber.log.Timber;
 
 // Used in DoEditorActions and Submit
 public class ProgressRequestBody extends RequestBody {
@@ -32,7 +33,7 @@ public class ProgressRequestBody extends RequestBody {
         try {
             return mDelegate.contentLength();
         } catch (IOException e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
         return -1;
     }

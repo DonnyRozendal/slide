@@ -88,6 +88,7 @@ import me.ccrama.redditslide.util.ClipboardUtil;
 import me.ccrama.redditslide.util.LayoutUtils;
 import me.ccrama.redditslide.util.LinkUtil;
 import me.ccrama.redditslide.util.TimeUtils;
+import timber.log.Timber;
 
 /**
  * Created by Carlos on 8/4/2016.
@@ -334,7 +335,7 @@ public class CommentAdapterHelper {
                     new AccountManager(Authentication.reddit).sendRepliesToInbox(comment, showReplies);
 
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
 
                 return null;
@@ -400,7 +401,7 @@ public class CommentAdapterHelper {
                     }
 
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
 
                 return null;
@@ -457,7 +458,7 @@ public class CommentAdapterHelper {
                     categories.add("New category");
                     return categories;
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return new ArrayList<String>() {{
                         add("New category");
                     }};
@@ -509,7 +510,7 @@ public class CommentAdapterHelper {
                                                                                             flair);
                                                                             return true;
                                                                         } catch (ApiException e) {
-                                                                            e.printStackTrace();
+                                                                            Timber.e(e);
                                                                             return false;
                                                                         }
                                                                     }
@@ -551,7 +552,7 @@ public class CommentAdapterHelper {
                                                             comment, t);
                                                     return true;
                                                 } catch (ApiException e) {
-                                                    e.printStackTrace();
+                                                    Timber.e(e);
                                                     return false;
                                                 }
                                             }
@@ -848,7 +849,7 @@ public class CommentAdapterHelper {
                                                 if (e instanceof InvalidScopeException) {
                                                     scope = true;
                                                 }
-                                                e.printStackTrace();
+                                                Timber.e(e);
                                                 return false;
                                             }
                                         }
@@ -938,7 +939,7 @@ public class CommentAdapterHelper {
                     new ModerationManager(Authentication.reddit).setDistinguishedStatus(comment,
                             DistinguishedStatus.MODERATOR);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -970,7 +971,7 @@ public class CommentAdapterHelper {
                     new ModerationManager(Authentication.reddit).setDistinguishedStatus(comment,
                             DistinguishedStatus.NORMAL);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -1001,7 +1002,7 @@ public class CommentAdapterHelper {
                 try {
                     new ModerationManager(Authentication.reddit).setSticky(comment, true);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -1071,7 +1072,7 @@ public class CommentAdapterHelper {
                 try {
                     new ModerationManager(Authentication.reddit).approve(comment);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -1102,7 +1103,7 @@ public class CommentAdapterHelper {
                 try {
                     new ModerationManager(Authentication.reddit).setSticky(comment, false);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -1139,7 +1140,7 @@ public class CommentAdapterHelper {
                 try {
                     new ModerationManager(Authentication.reddit).remove(comment, spam);
                 } catch (ApiException | NetworkException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -1225,7 +1226,7 @@ public class CommentAdapterHelper {
                             Authentication.reddit.get(comment.getFullName()).get(0),
                             DistinguishedStatus.MODERATOR);
                 } catch (ApiException | NetworkException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
                 }
                 return true;
@@ -1259,7 +1260,7 @@ public class CommentAdapterHelper {
                         new ModerationManager(Authentication.reddit).setUnlocked(comment);
                     }
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -1657,7 +1658,7 @@ public class CommentAdapterHelper {
                 adapter.editComment(n, holder);
                 dialog.dismiss();
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
                 ((Activity) mContext).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -1735,7 +1736,7 @@ public class CommentAdapterHelper {
                 adapter.deleted.add(baseNode.getComment().getFullName());
                 return true;
             } catch (ApiException e) {
-                e.printStackTrace();
+                Timber.e(e);
                 return false;
             }
         }
@@ -1755,7 +1756,7 @@ public class CommentAdapterHelper {
             try {
                 new AccountManager(Authentication.reddit).report(baseNode.getComment(), reason[0]);
             } catch (ApiException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
             return null;
         }

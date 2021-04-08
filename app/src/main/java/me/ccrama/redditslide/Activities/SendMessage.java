@@ -31,6 +31,7 @@ import me.ccrama.redditslide.R;
 import me.ccrama.redditslide.UserSubscriptions;
 import me.ccrama.redditslide.Views.DoEditorActions;
 import me.ccrama.redditslide.Visuals.Palette;
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 3/5/2015.
@@ -191,7 +192,7 @@ public class SendMessage extends BaseActivity {
                     new net.dean.jraw.managers.AccountManager(Authentication.reddit).reply(previousMessage, bodytext);
                 } catch (ApiException e) {
                     messageSent = false;
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
             } else {
                 try {
@@ -213,7 +214,7 @@ public class SendMessage extends BaseActivity {
 
                 } catch (ApiException e) {
                     messageSent = false;
-                    e.printStackTrace();
+                    Timber.e(e);
 
                     //Display a Toast with an error if the user doesn't exist
                     if (e.getReason().equals("USER_DOESNT_EXIST") || e.getReason().equals("NO_USER")) {

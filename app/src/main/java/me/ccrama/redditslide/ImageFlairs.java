@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
 import me.ccrama.redditslide.Activities.SendMessage;
 import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.OkHttpImageDownloader;
+import timber.log.Timber;
 
 /**
  * Created by Carlos on 4/15/2017.
@@ -128,7 +129,7 @@ public class ImageFlairs {
                         if (backgroundURL == null) backgroundURL = flairStylesheet.defaultURL;
                         if (!allImages.contains(backgroundURL)) allImages.add(backgroundURL);
                     } catch (Exception e) {
-                        //  e.printStackTrace();
+                        //  Timber.e(e);
                     }
                 }
                 if (flairStylesheet.defaultURL != null) {
@@ -140,7 +141,7 @@ public class ImageFlairs {
                 }
                 return flairStylesheet;
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
                 return null;
             }
         }
@@ -618,14 +619,14 @@ public class ImageFlairs {
                                 flairDimensions.height, flairLocation.x, flairLocation.y).transform(
                                 loadedImage, flairLocation.isPercentage);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                     try {
                         getFlairImageLoader(context).getDiskCache()
                                 .save(sub.toLowerCase(Locale.ENGLISH) + ":" + id.toLowerCase(Locale.ENGLISH), newBit);
                         count += 1;
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                 }
                 loadedImage.recycle();

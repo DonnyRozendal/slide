@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import me.ccrama.redditslide.R;
 import me.ccrama.redditslide.Reddit;
+import timber.log.Timber;
 
 public class ShareUtil {
     private ShareUtil() {
@@ -79,7 +80,7 @@ public class ShareUtil {
                 }
             }
         } catch (IOException | NullPointerException e) {
-            e.printStackTrace();
+            Timber.e(e);
             Toast.makeText(context, context.getString(R.string.err_share_image), Toast.LENGTH_LONG)
                     .show();
         }

@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import me.ccrama.redditslide.SettingValues;
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 9/28/2015.
@@ -25,7 +26,7 @@ public class MakeExternal extends Activity {
                 e.putStringSet(SettingValues.PREF_ALWAYS_EXTERNAL, SettingValues.alwaysExternal);
                 e.apply();
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
         finish();

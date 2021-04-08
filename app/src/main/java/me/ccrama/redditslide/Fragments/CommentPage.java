@@ -118,6 +118,7 @@ import me.ccrama.redditslide.util.NetworkUtil;
 import me.ccrama.redditslide.util.OnSingleClickListener;
 import me.ccrama.redditslide.util.SubmissionParser;
 import me.ccrama.redditslide.util.TimeUtils;
+import timber.log.Timber;
 
 import static me.ccrama.redditslide.Notifications.ImageDownloadNotificationService.EXTRA_SUBMISSION_TITLE;
 
@@ -1376,7 +1377,7 @@ public class CommentPage extends Fragment implements Toolbar.OnMenuItemClickList
                                                                                                                 });
                                                                                             }
                                                                                         });
-                                                                                e.printStackTrace();
+                                                                                Timber.e(e);
                                                                             }
                                                                             return null;
                                                                         }
@@ -1779,7 +1780,7 @@ public class CommentPage extends Fragment implements Toolbar.OnMenuItemClickList
                         fullname.contains("_") ? fullname : "t3_" + fullname, getContext(),
                         !NetworkUtil.isConnected(getActivity()), new ObjectMapper().reader());
             } catch (IOException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
             if (s != null && s.getComments() != null) {
                 doRefresh(false);

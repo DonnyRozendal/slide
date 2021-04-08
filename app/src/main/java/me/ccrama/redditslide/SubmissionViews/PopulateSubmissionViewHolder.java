@@ -121,6 +121,7 @@ import me.ccrama.redditslide.util.LinkUtil;
 import me.ccrama.redditslide.util.NetworkUtil;
 import me.ccrama.redditslide.util.OnSingleClickListener;
 import me.ccrama.redditslide.util.SubmissionParser;
+import timber.log.Timber;
 
 import static me.ccrama.redditslide.Notifications.ImageDownloadNotificationService.EXTRA_SUBMISSION_TITLE;
 
@@ -1088,7 +1089,7 @@ public class PopulateSubmissionViewHolder {
                     }
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
 
                 return null;
@@ -1158,7 +1159,7 @@ public class PopulateSubmissionViewHolder {
                     categories.add("New category");
                     return categories;
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return new ArrayList<String>() {{
                         add("New category");
                     }};
@@ -1211,7 +1212,7 @@ public class PopulateSubmissionViewHolder {
                                                                                             flair);
                                                                             return true;
                                                                         } catch (ApiException e) {
-                                                                            e.printStackTrace();
+                                                                            Timber.e(e);
                                                                             return false;
                                                                         }
                                                                     }
@@ -1254,7 +1255,7 @@ public class PopulateSubmissionViewHolder {
                                                             submission, t);
                                                     return true;
                                                 } catch (ApiException e) {
-                                                    e.printStackTrace();
+                                                    Timber.e(e);
                                                     return false;
                                                 }
                                             }
@@ -1712,7 +1713,7 @@ public class PopulateSubmissionViewHolder {
                             Authentication.reddit.get("t1_" + toDistinguish).get(0),
                             DistinguishedStatus.MODERATOR);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -1766,7 +1767,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).remove(submission, spam);
                 } catch (ApiException | NetworkException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -1793,7 +1794,7 @@ public class PopulateSubmissionViewHolder {
                     }
                     return finalFlairs;
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     //sub probably has no flairs?
                 }
                 return null;
@@ -1869,7 +1870,7 @@ public class PopulateSubmissionViewHolder {
                             submission.getSubredditName(), t, flair, submission);
                     return true;
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
                 }
             }
@@ -1960,7 +1961,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).setSticky(submission, true);
                 } catch (ApiException | NetworkException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -1993,7 +1994,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).setSticky(submission, false);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2025,7 +2026,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).setLocked(submission);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2057,7 +2058,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).setUnlocked(submission);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2090,7 +2091,7 @@ public class PopulateSubmissionViewHolder {
                     new ModerationManager(Authentication.reddit).setDistinguishedStatus(submission,
                             DistinguishedStatus.MODERATOR);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2123,7 +2124,7 @@ public class PopulateSubmissionViewHolder {
                     new ModerationManager(Authentication.reddit).setDistinguishedStatus(submission,
                             DistinguishedStatus.MODERATOR);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2156,7 +2157,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).setNsfw(submission, true);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2190,7 +2191,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).setNsfw(submission, false);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2223,7 +2224,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).setSpoiler(submission, true);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2257,7 +2258,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).setSpoiler(submission, false);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2312,7 +2313,7 @@ public class PopulateSubmissionViewHolder {
                 try {
                     new ModerationManager(Authentication.reddit).approve(submission);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -2411,7 +2412,7 @@ public class PopulateSubmissionViewHolder {
                                                 if (e instanceof InvalidScopeException) {
                                                     scope = true;
                                                 }
-                                                e.printStackTrace();
+                                                Timber.e(e);
                                                 return false;
                                             }
                                         }
@@ -2971,7 +2972,7 @@ public class PopulateSubmissionViewHolder {
                                 }
                                 return finalFlairs;
                             } catch (Exception e) {
-                                e.printStackTrace();
+                                Timber.e(e);
                                 //sub probably has no flairs?
                             }
 
@@ -3162,7 +3163,7 @@ public class PopulateSubmissionViewHolder {
                                                                                         Authentication.reddit)
                                                                                         .delete(submission);
                                                                             } catch (ApiException e) {
-                                                                                e.printStackTrace();
+                                                                                Timber.e(e);
                                                                             }
                                                                             return null;
                                                                         }
@@ -3265,7 +3266,7 @@ public class PopulateSubmissionViewHolder {
                                                                                                                             submission);
                                                                                                             return true;
                                                                                                         } catch (ApiException e) {
-                                                                                                            e.printStackTrace();
+                                                                                                            Timber.e(e);
                                                                                                             return false;
                                                                                                         }
                                                                                                     }
@@ -3333,7 +3334,7 @@ public class PopulateSubmissionViewHolder {
                                                                                                     submission);
                                                                                     return true;
                                                                                 } catch (ApiException e) {
-                                                                                    e.printStackTrace();
+                                                                                    Timber.e(e);
                                                                                     return false;
                                                                                 }
                                                                             }
@@ -3494,7 +3495,7 @@ public class PopulateSubmissionViewHolder {
                 new AccountManager(
                         Authentication.reddit).report(submission, reason[0]);
             } catch (ApiException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
             return null;
         }

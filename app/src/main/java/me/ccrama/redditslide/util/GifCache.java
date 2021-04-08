@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import timber.log.Timber;
+
 /**
  * Created by carlo_000 on 5/5/2016.
  */
@@ -29,7 +31,7 @@ public class GifCache {
             ((LruDiskCache) discCache).setBufferSize(5 * 1024);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Timber.e(e);
             discCache = new UnlimitedDiskCache(dir);
         }
     }
@@ -42,7 +44,7 @@ public class GifCache {
         try {
             LogUtil.v(discCache.save(url, stream, listener) + "DONE ");
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
         } finally {
             IoUtils.closeSilently(stream);
         }

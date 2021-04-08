@@ -1,5 +1,6 @@
 package me.ccrama.redditslide.Widget;
 
+import android.Manifest;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
@@ -166,14 +167,14 @@ public class ListViewRemoteViewsFactory implements RemoteViewsService.RemoteView
                     Intent widgetUpdateIntent = new Intent(mContext, SubredditWidgetProvider.class);
                     widgetUpdateIntent.setAction(SubredditWidgetProvider.UPDATE_MEETING_ACTION);
                     widgetUpdateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id);
-                    mContext.sendBroadcast(widgetUpdateIntent);
+                    mContext.sendBroadcast(widgetUpdateIntent, Manifest.permission.BIND_APPWIDGET);
                 }
             }.execute();
         } else {
             Intent widgetUpdateIntent = new Intent(mContext, SubredditWidgetProvider.class);
             widgetUpdateIntent.setAction(SubredditWidgetProvider.UPDATE_MEETING_ACTION);
             widgetUpdateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, id);
-            mContext.sendBroadcast(widgetUpdateIntent);
+            mContext.sendBroadcast(widgetUpdateIntent, Manifest.permission.BIND_APPWIDGET);
         }
     }
 

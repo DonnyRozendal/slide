@@ -15,6 +15,8 @@ import androidx.core.content.ContextCompat;
 
 import java.io.File;
 
+import timber.log.Timber;
+
 /**
  * Created by ccrama on 9/28/2015.
  */
@@ -61,7 +63,7 @@ public class DeleteFile extends Activity {
                             }
                         });
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }        }
         finish();
     }

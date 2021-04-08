@@ -25,6 +25,7 @@ import me.ccrama.redditslide.Reddit;
 import me.ccrama.redditslide.SpoilerRobotoTextView;
 import me.ccrama.redditslide.Visuals.Palette;
 import me.ccrama.redditslide.util.LinkUtil;
+import timber.log.Timber;
 
 public class ReaderMode extends BaseActivityAnim {
     private       int    mSubredditColor;
@@ -113,7 +114,7 @@ public class ReaderMode extends BaseActivityAnim {
                     articleText = readability.outerHtml();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
             return null;
         }

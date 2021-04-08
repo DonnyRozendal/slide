@@ -16,6 +16,7 @@ import java.util.Set;
 
 import okio.BufferedSource;
 import okio.Okio;
+import timber.log.Timber;
 
 /**
  * Created by Carlos on 8/12/2016.
@@ -33,7 +34,7 @@ public class AdBlocker {
                 try {
                     loadFromAssets(context);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
                 return null;
             }
@@ -62,7 +63,7 @@ public class AdBlocker {
             String host = new URL(url).getHost();
             return host != null && hostMatches(host);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
         return false;
     }

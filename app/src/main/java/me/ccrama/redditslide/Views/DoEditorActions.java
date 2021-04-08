@@ -55,6 +55,7 @@ import me.ccrama.redditslide.SettingValues;
 import me.ccrama.redditslide.SpoilerRobotoTextView;
 import me.ccrama.redditslide.Visuals.ColorPreferences;
 import me.ccrama.redditslide.util.SubmissionParser;
+import timber.log.Timber;
 
 /**
  * Created by carlo_000 on 10/18/2015.
@@ -645,7 +646,7 @@ public class DoEditorActions {
          * (\n[> ]*){2,} captures any number of two or more newlines with any combination of spaces or >s since markdown ignores those by themselves
          * (?=[^\n> ]) performs a lookahead and ensures there's a character that isn't a newline, >, or space
          */
-        selected = selected.replaceAll("([^\\n> ])(\\n[> ]*){2,}(?=[^\\n> ])", "$1" + endWrap + "$2" + startWrap);
+        selected = selected.replaceAll("([^\\n> ])(\\n[> ]){2,}(?=[^\\n> ])", "$1" + endWrap + "$2" + startWrap);
         editText.getText().replace(start, end, selected);
     }
 
@@ -766,7 +767,7 @@ public class DoEditorActions {
                             }
                         })
                         .show();
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
     }
@@ -845,7 +846,7 @@ public class DoEditorActions {
                             }
                         })
                         .show();
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
     }
@@ -860,14 +861,14 @@ public class DoEditorActions {
             try {
                 new UploadImgurDEA(c).execute(uris.get(0));
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         } else {
             //Multiple images
             try {
                 new UploadImgurAlbumDEA(c).execute(uris.toArray(new Uri[0]));
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
 
             }
         }

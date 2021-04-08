@@ -67,6 +67,7 @@ import me.ccrama.redditslide.util.ClipboardUtil;
 import me.ccrama.redditslide.util.LayoutUtils;
 import me.ccrama.redditslide.util.SubmissionParser;
 import me.ccrama.redditslide.util.TimeUtils;
+import timber.log.Timber;
 
 
 public class InboxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
@@ -477,7 +478,7 @@ public class InboxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 sent = true;
             } catch (ApiException e) {
                 sent = false;
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
 

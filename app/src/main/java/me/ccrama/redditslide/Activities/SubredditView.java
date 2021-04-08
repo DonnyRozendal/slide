@@ -96,6 +96,7 @@ import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.OnSingleClickListener;
 import me.ccrama.redditslide.util.SortingUtil;
 import me.ccrama.redditslide.util.SubmissionParser;
+import timber.log.Timber;
 
 public class SubredditView extends BaseActivity {
 
@@ -835,7 +836,7 @@ public class SubredditView extends BaseActivity {
                                                                                             }
                                                                                             return true;
                                                                                         } catch (Exception e) {
-                                                                                            e.printStackTrace();
+                                                                                            Timber.e(e);
                                                                                             return false;
                                                                                         }
                                                                                     }
@@ -900,7 +901,7 @@ public class SubredditView extends BaseActivity {
                                                                     }
                                                                     return true;
                                                                 } catch (Exception e) {
-                                                                    e.printStackTrace();
+                                                                    Timber.e(e);
                                                                     return false;
                                                                 }
                                                             }
@@ -1363,7 +1364,7 @@ public class SubredditView extends BaseActivity {
                                                                     });
                                                                 }
                                                             });
-                                                            e.printStackTrace();
+                                                            Timber.e(e);
                                                         }
                                                         return null;
                                                     }
@@ -2109,7 +2110,7 @@ public class SubredditView extends BaseActivity {
                         }
                     }
                 });
-                e.printStackTrace();
+                Timber.e(e);
 
                 return null;
             }

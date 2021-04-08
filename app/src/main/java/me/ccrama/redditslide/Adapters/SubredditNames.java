@@ -19,6 +19,7 @@ import me.ccrama.redditslide.Fragments.SubredditListView;
 import me.ccrama.redditslide.PostMatch;
 import me.ccrama.redditslide.Reddit;
 import me.ccrama.redditslide.SettingValues;
+import timber.log.Timber;
 
 /**
  * This class is reponsible for loading a list of subreddits from an endpoint
@@ -139,7 +140,7 @@ public class SubredditNames {
                     }
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     if (e.getMessage().contains("Forbidden")) {
                         Reddit.authentication.updateToken(context);
                     }
@@ -163,7 +164,7 @@ public class SubredditNames {
                     }
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     if (e.getMessage().contains("Forbidden")) {
                         Reddit.authentication.updateToken(context);
                     }

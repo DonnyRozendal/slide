@@ -72,6 +72,7 @@ import me.ccrama.redditslide.UserSubscriptions;
 import me.ccrama.redditslide.Visuals.ColorPreferences;
 import me.ccrama.redditslide.Visuals.Palette;
 import me.ccrama.redditslide.util.LogUtil;
+import timber.log.Timber;
 
 import static me.ccrama.redditslide.UserSubscriptions.setPinned;
 
@@ -489,7 +490,7 @@ public class ReorderSubreddits extends BaseActivityAnim {
                                             recyclerView.smoothScrollToPosition(pos);
                                         }
                                     } catch (Exception e) {
-                                        e.printStackTrace();
+                                        Timber.e(e);
                                         //todo make this better
                                         new AlertDialogWrapper.Builder(
                                                 ReorderSubreddits.this).setTitle(

@@ -57,6 +57,7 @@ import me.ccrama.redditslide.R;
 import me.ccrama.redditslide.UserSubscriptions;
 import me.ccrama.redditslide.Visuals.Palette;
 import me.ccrama.redditslide.util.LogUtil;
+import timber.log.Timber;
 
 /**
  * This class handles creation of Multireddits.
@@ -334,7 +335,7 @@ public class CreateMulti extends BaseActivityAnim {
                             .setMessage(errorMsg)
                             .setNeutralButton(R.string.btn_ok, (dialogInterface, i) -> finish()).create().show();
                 });
-                e.printStackTrace();
+                Timber.e(e);
             } catch (IllegalArgumentException e) {
                 runOnUiThread(() -> new AlertDialogWrapper.Builder(CreateMulti.this)
                         .setTitle(R.string.multireddit_invalid_name)
@@ -385,7 +386,7 @@ public class CreateMulti extends BaseActivityAnim {
                                                 .setNeutralButton(R.string.btn_ok, (dialogInterface, i) -> finish())
                                                 .create()
                                                 .show());
-                                        e.printStackTrace();
+                                        Timber.e(e);
                                     }
                                     return null;
                                 }

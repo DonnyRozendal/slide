@@ -15,6 +15,7 @@ import net.dean.jraw.paginators.Paginator;
 import java.util.ArrayList;
 
 import me.ccrama.redditslide.Authentication;
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 9/17/2015.
@@ -112,7 +113,7 @@ public class InboxMessages extends GeneralPosts {
                 }
                 return null;
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
                 return null;
             }
         }

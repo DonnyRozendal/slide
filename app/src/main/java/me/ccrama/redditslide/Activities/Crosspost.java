@@ -32,6 +32,7 @@ import me.ccrama.redditslide.SpoilerRobotoTextView;
 import me.ccrama.redditslide.UserSubscriptions;
 import me.ccrama.redditslide.Views.CommentOverflow;
 import me.ccrama.redditslide.util.SubmissionParser;
+import timber.log.Timber;
 
 
 /**
@@ -211,7 +212,7 @@ public class Crosspost extends BaseActivity {
                                     + s.getFullName().substring(3));
                     Crosspost.this.finish();
                 } catch (final ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -225,7 +226,7 @@ public class Crosspost extends BaseActivity {
                     });
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
 
                 runOnUiThread(new Runnable() {
                     @Override

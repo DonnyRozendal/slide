@@ -33,6 +33,7 @@ import me.ccrama.redditslide.Activities.NewsActivity;
 import me.ccrama.redditslide.DragSort.ReorderSubreddits;
 import me.ccrama.redditslide.Toolbox.Toolbox;
 import me.ccrama.redditslide.util.NetworkUtil;
+import timber.log.Timber;
 
 /**
  * Created by carlo_000 on 1/16/2016.
@@ -334,7 +335,7 @@ public class UserSubscriptions {
                 }
             } catch (Exception e) {
                 //failed;
-                e.printStackTrace();
+                Timber.e(e);
             }
             addSubsToHistory(toReturn);
         } else {
@@ -363,7 +364,7 @@ public class UserSubscriptions {
                 }
             }
         } catch (ApiException | NetworkException e) {
-            e.printStackTrace();
+            Timber.e(e);
         }
     }
 
@@ -417,7 +418,7 @@ public class UserSubscriptions {
                         new ArrayList<>(new MultiRedditManager(Authentication.reddit).mine());
             } catch (Exception e) {
                 multireddits = null;
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
     }
@@ -450,7 +451,7 @@ public class UserSubscriptions {
                             new MultiRedditManager(Authentication.reddit).getPublicMultis(profile)));
                 } catch (Exception e) {
                     public_multireddits.put(profile, null);
-                    e.printStackTrace();
+                    Timber.e(e);
                 }
                 return public_multireddits.get(profile);
             }
@@ -478,7 +479,7 @@ public class UserSubscriptions {
             cacheModOf();
         } catch (Exception e) {
             //failed;
-            e.printStackTrace();
+            Timber.e(e);
         }
 
         return finished;
@@ -507,7 +508,7 @@ public class UserSubscriptions {
 
             } catch (Exception e) {
                 //failed;
-                e.printStackTrace();
+                Timber.e(e);
             }
         }
         return friends;
@@ -662,7 +663,7 @@ public class UserSubscriptions {
 
             } catch (Exception e) {
                 //failed;
-                e.printStackTrace();
+                Timber.e(e);
             }
 
             addSubsToHistory(toReturn);
@@ -690,7 +691,7 @@ public class UserSubscriptions {
 
                     } catch (Exception e) {
                         //failed;
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                 }
                 return null;

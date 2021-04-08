@@ -19,6 +19,7 @@ import java.util.TreeMap;
 
 import me.ccrama.redditslide.Authentication;
 import me.ccrama.redditslide.PostMatch;
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 9/17/2015.
@@ -174,7 +175,7 @@ public class HistoryPosts extends GeneralPosts {
 
                 return newData;
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
                 return null;
             }
         }

@@ -27,6 +27,7 @@ import me.ccrama.redditslide.UserSubscriptions;
 import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.NetworkUtil;
 import me.ccrama.redditslide.util.PhotoLoader;
+import timber.log.Timber;
 
 /**
  * This class is reponsible for loading subreddit specific submissions
@@ -194,7 +195,7 @@ public class MultiredditPosts implements PostLoader {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+                Timber.e(e);
                 if (e.getMessage().contains("Forbidden")) {
                     Reddit.authentication.updateToken(context);
                 }

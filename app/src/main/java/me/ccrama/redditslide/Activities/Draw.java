@@ -31,6 +31,7 @@ import me.ccrama.redditslide.Views.CanvasView;
 import me.ccrama.redditslide.Views.DoEditorActions;
 import me.ccrama.redditslide.Visuals.Palette;
 import me.ccrama.redditslide.util.FileUtil;
+import timber.log.Timber;
 
 
 /**
@@ -107,7 +108,7 @@ public class Draw extends BaseActivity implements ColorChooserDialog.ColorCallba
                     }
                 }
             } catch (IOException | NullPointerException e) {
-                e.printStackTrace();
+                Timber.e(e);
                 //todo error Toast.makeText(this, getString(R.string.err_share_image), Toast.LENGTH_LONG).show();
             }
         }
@@ -154,7 +155,7 @@ public class Draw extends BaseActivity implements ColorChooserDialog.ColorCallba
                 enabled = true;
 
             } catch (IOException e) {
-                e.printStackTrace();
+                Timber.e(e);
             }
         } else {
             finish();

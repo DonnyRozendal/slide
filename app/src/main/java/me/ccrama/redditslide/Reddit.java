@@ -80,6 +80,7 @@ import me.ccrama.redditslide.util.billing.IabHelper;
 import me.ccrama.redditslide.util.billing.IabResult;
 import okhttp3.Dns;
 import okhttp3.OkHttpClient;
+import timber.log.Timber;
 
 /**
  * Created by ccrama on 9/17/2015.
@@ -482,6 +483,10 @@ public class Reddit extends MultiDexApplication implements Application.ActivityL
 
         UpgradeUtil.upgrade(getApplicationContext());
         doMainStuff();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
     public void doMainStuff() {

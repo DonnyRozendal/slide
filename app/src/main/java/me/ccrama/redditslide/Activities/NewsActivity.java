@@ -55,6 +55,7 @@ import me.ccrama.redditslide.util.LayoutUtils;
 import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.NetworkStateReceiver;
 import me.ccrama.redditslide.util.NetworkUtil;
+import timber.log.Timber;
 
 public class NewsActivity extends BaseActivity
         implements NetworkStateReceiver.NetworkStateReceiverListener {
@@ -114,7 +115,7 @@ public class NewsActivity extends BaseActivity
                         new AccountManager(Authentication.reddit).storeVisits(returned);
                         SynccitRead.newVisited = new ArrayList<>();
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Timber.e(e);
                     }
                     return null;
                 }

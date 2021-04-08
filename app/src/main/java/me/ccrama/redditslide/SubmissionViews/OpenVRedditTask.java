@@ -11,6 +11,7 @@ import me.ccrama.redditslide.OpenRedditLink;
 import me.ccrama.redditslide.Visuals.Palette;
 import me.ccrama.redditslide.util.LinkUtil;
 import me.ccrama.redditslide.util.LogUtil;
+import timber.log.Timber;
 
 public class OpenVRedditTask extends AsyncTask<String, Void, Void> {
 
@@ -39,7 +40,7 @@ public class OpenVRedditTask extends AsyncTask<String, Void, Void> {
             OpenRedditLink.openUrl(contextActivity.get(),secondURL, true);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
             LinkUtil.openUrl(url,Palette.getColor(subreddit), contextActivity.get());
 
         }

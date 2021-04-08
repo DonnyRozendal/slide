@@ -13,6 +13,8 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Locale;
 
+import timber.log.Timber;
+
 /**
  * Created by ccrama on 5/26/2015.
  */
@@ -214,7 +216,7 @@ public class ContentType {
             {
                 return Type.LINK;
             }
-            e.printStackTrace();
+            Timber.e(e);
             return Type.NONE;
         }
     }

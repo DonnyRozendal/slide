@@ -81,6 +81,7 @@ import me.ccrama.redditslide.util.LogUtil;
 import me.ccrama.redditslide.util.OnSingleClickListener;
 import me.ccrama.redditslide.util.SubmissionParser;
 import me.ccrama.redditslide.util.TimeUtils;
+import timber.log.Timber;
 
 
 public class ModeratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements BaseAdapter {
@@ -712,7 +713,7 @@ public class ModeratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 try {
                     new ModerationManager(Authentication.reddit).approve(comment);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -744,7 +745,7 @@ public class ModeratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     new ModerationManager(Authentication.reddit).setDistinguishedStatus(comment,
                             DistinguishedStatus.MODERATOR);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -776,7 +777,7 @@ public class ModeratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     new ModerationManager(Authentication.reddit).setDistinguishedStatus(comment,
                             DistinguishedStatus.NORMAL);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -808,7 +809,7 @@ public class ModeratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 try {
                     new ModerationManager(Authentication.reddit).remove(comment, spam);
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }
@@ -887,7 +888,7 @@ public class ModeratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                             Authentication.reddit.get(comment.getFullName()).get(0),
                             DistinguishedStatus.MODERATOR);
                 } catch (ApiException | NetworkException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
                 }
                 return true;
@@ -921,7 +922,7 @@ public class ModeratorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                         new ModerationManager(Authentication.reddit).setUnlocked(comment);
                     }
                 } catch (ApiException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     return false;
 
                 }

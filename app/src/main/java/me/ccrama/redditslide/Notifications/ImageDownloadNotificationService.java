@@ -40,6 +40,7 @@ import me.ccrama.redditslide.Reddit;
 import me.ccrama.redditslide.SettingValues;
 import me.ccrama.redditslide.util.FileUtil;
 import me.ccrama.redditslide.util.LogUtil;
+import timber.log.Timber;
 
 /**
  * Created by Carlos on 7/15/2016.
@@ -190,7 +191,7 @@ public class ImageDownloadNotificationService extends Service {
         }
 
         public void onError(Exception e) {
-            e.printStackTrace();
+            Timber.e(e);
             mNotifyManager.cancel(id);
             stopSelf();
             try {
@@ -365,7 +366,7 @@ public class ImageDownloadNotificationService extends Service {
                     out.close();
                     showNotifPhoto(f, bitmap);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Timber.e(e);
                     onError(e);
                 }
             }
